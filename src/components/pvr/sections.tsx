@@ -49,20 +49,10 @@ export function Reveal({ children, className = "" }: { children: ReactNode; clas
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          el.classList.add("visible");
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.01, rootMargin: "50px 0px" },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
+    el.classList.add("visible");
   }, []);
   return (
-    <div ref={ref} className={`reveal ${className}`}>
+    <div ref={ref} className={`reveal visible ${className}`}>
       {children}
     </div>
   );
