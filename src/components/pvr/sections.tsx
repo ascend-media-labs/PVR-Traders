@@ -266,7 +266,7 @@ export function MaterialsCarousel() {
                 onClick={() => {
                   if (typeof window !== "undefined") {
                     sessionStorage.setItem("pvr_selected_product", String(index));
-                    window.location.href = "/services#product-detail-section";
+                    window.location.href = `/services?product=${index}#product-detail-section`;
                   }
                 }}
                 role="button"
@@ -276,7 +276,7 @@ export function MaterialsCarousel() {
                     e.preventDefault();
                     if (typeof window !== "undefined") {
                       sessionStorage.setItem("pvr_selected_product", String(index));
-                      window.location.href = "/services#product-detail-section";
+                      window.location.href = `/services?product=${index}#product-detail-section`;
                     }
                   }
                 }}
@@ -308,10 +308,20 @@ export function MaterialsCarousel() {
                   <h3 className="material-card-title">{item.title}</h3>
 
                   <div className="material-card-footer">
-                    <span className="material-book-btn">
+                    <button
+                      type="button"
+                      className="material-book-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (typeof window !== "undefined") {
+                          sessionStorage.setItem("pvr_selected_product", String(index));
+                          window.location.href = `/services?product=${index}#product-detail-section`;
+                        }
+                      }}
+                    >
                       <span>Book Now</span>
                       <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                    </span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -423,35 +433,83 @@ export function Services({ isStandalonePage = false }: ServicesProps) {
 
   const [selectedProductIndex, setSelectedProductIndex] = useState(() => {
     if (typeof window !== "undefined") {
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlProd = urlParams.get("product");
+      if (urlProd !== null && !isNaN(Number(urlProd))) {
+        return Number(urlProd);
+      }
       const saved = sessionStorage.getItem("pvr_selected_product");
       if (saved !== null && !isNaN(Number(saved))) {
         return Number(saved);
       }
     }
-    return 2;
+    return 0;
   });
 
   useEffect(() => {
     if (typeof window !== "undefined" && isServicesRoute) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlProd = urlParams.get("product");
       const saved = sessionStorage.getItem("pvr_selected_product");
-      if (saved !== null && !isNaN(Number(saved))) {
-        setSelectedProductIndex(Number(saved));
-        sessionStorage.removeItem("pvr_selected_product");
-        setTimeout(() => {
+      const targetProd =
+        urlProd !== null && !isNaN(Number(urlProd))
+          ? Number(urlProd)
+          : saved !== null && !isNaN(Number(saved))
+            ? Number(saved)
+            : null;
+
+      if (targetProd !== null) {
+        setSelectedProductIndex(targetProd);
+      }
+
+      const isFromBookNow =
+        targetProd !== null ||
+        window.location.hash === "#product-detail-section" ||
+        urlParams.has("product");
+
+      let t1: NodeJS.Timeout | undefined;
+      let t2: NodeJS.Timeout | undefined;
+      let t3: NodeJS.Timeout | undefined;
+      let t4: NodeJS.Timeout | undefined;
+
+      if (isFromBookNow) {
+        const scrollToProduct = () => {
           const el = document.getElementById("product-detail-section");
           if (el) {
-            el.scrollIntoView({ behavior: "smooth", block: "start" });
+            const navHeight = 84;
+            const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = Math.max(0, elementPosition - navHeight);
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "instant",
+            });
           }
-        }, 150);
+        };
+
+        // Run immediately and across initial frame intervals to guarantee exact position
+        scrollToProduct();
+        requestAnimationFrame(scrollToProduct);
+        t1 = setTimeout(scrollToProduct, 60);
+        t2 = setTimeout(scrollToProduct, 160);
+        t3 = setTimeout(scrollToProduct, 350);
+        t4 = setTimeout(scrollToProduct, 600);
       }
+
+      return () => {
+        if (t1) clearTimeout(t1);
+        if (t2) clearTimeout(t2);
+        if (t3) clearTimeout(t3);
+        if (t4) clearTimeout(t4);
+      };
     }
+    return undefined;
   }, [isServicesRoute]);
 
   const handleSelectProduct = (index: number) => {
     if (!isServicesRoute) {
       if (typeof window !== "undefined") {
         sessionStorage.setItem("pvr_selected_product", String(index));
-        window.location.href = "/services#product-detail-section";
+        window.location.href = `/services?product=${index}#product-detail-section`;
       }
       return;
     }
@@ -459,7 +517,13 @@ export function Services({ isStandalonePage = false }: ServicesProps) {
     setSelectedProductIndex(index);
     const el = document.getElementById("product-detail-section");
     if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      const navHeight = 84;
+      const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = Math.max(0, elementPosition - navHeight);
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
   };
 
@@ -576,7 +640,7 @@ export function Services({ isStandalonePage = false }: ServicesProps) {
 
         {/* In-Page In-Detail Product Specification & Configurator - ONLY on Services Page */}
         {isServicesRoute && (
-          <div id="product-detail-section" className="scroll-mt-24">
+          <div className="scroll-mt-24">
             <ProductDetailSection
               selectedIndex={selectedProductIndex}
               onSelectProduct={setSelectedProductIndex}
