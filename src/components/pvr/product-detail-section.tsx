@@ -4,15 +4,11 @@ import {
   ShoppingCart,
   Plus,
   Minus,
-  ShieldCheck,
   Package,
-  Truck,
-  Award,
   Layers3,
   Waves,
   Pickaxe,
   BrickWall,
-  ArrowRight,
   Info,
   ChevronRight,
 } from "lucide-react";
@@ -441,14 +437,11 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
           <span>Product Specifications & Direct Procurement</span>
         </div>
         <h2 className="product-detail-main-title">{currentProduct.title}</h2>
-        <p className="product-detail-main-desc">
-          {currentProduct.description}
-        </p>
       </div>
 
       {/* 2-Column Responsive Body */}
       <div className="in-page-columns">
-        {/* Left Column: Rich Product Showcase & Technical Specs */}
+        {/* Left Column: Product Showcase Photo */}
         <div className="in-page-product-col">
           <div className="cement-modal-photo-wrap in-page-photo-wrap">
             <img
@@ -460,42 +453,6 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
               0{selectedIndex + 1} | {currentProduct.short.toUpperCase()}
             </span>
             <div className="cement-modal-photo-tag">{currentProduct.tag}</div>
-          </div>
-
-          <div className="cement-modal-product-details">
-            <div className="cement-modal-spec-pill">
-              <span className="spec-dot" />
-              <span>{currentProduct.spec}</span>
-            </div>
-
-            {/* Technical Specs Table */}
-            <div className="in-page-specs-table">
-              <span className="specs-table-heading">Technical Benchmarks & Delivery</span>
-              <div className="specs-table-grid">
-                {currentProduct.technicalSpecs.map((spec) => (
-                  <div className="specs-table-row" key={spec.label}>
-                    <span className="spec-label">{spec.label}</span>
-                    <span className="spec-value">{spec.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Quality Badges */}
-            <div className="cement-modal-highlights mt-3">
-              {currentProduct.highlights.map((h, i) => (
-                <div className="cement-highlight-item" key={i}>
-                  {i === 0 ? (
-                    <Award className="w-4 h-4 text-sky-600 flex-shrink-0" />
-                  ) : i === 1 ? (
-                    <ShieldCheck className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                  ) : (
-                    <Truck className="w-4 h-4 text-sky-600 flex-shrink-0" />
-                  )}
-                  <span>{h}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
 
@@ -530,7 +487,6 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
                           <span className="cement-type-name">{t.name}</span>
                           <span className="cement-type-tag">{t.tag}</span>
                         </div>
-                        <p className="cement-type-desc">{t.description}</p>
                         {isSelected && (
                           <div className="cement-type-check">
                             <Check className="w-3.5 h-3.5 text-white" />
@@ -568,7 +524,6 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
                           <span className="cement-type-name">{v.name}</span>
                           <span className="cement-type-tag">{v.tag}</span>
                         </div>
-                        <p className="cement-type-desc">{v.description}</p>
                         {isSelected && (
                           <div className="cement-type-check">
                             <Check className="w-3.5 h-3.5 text-white" />
@@ -608,7 +563,6 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
                           <span className="cement-type-name">{c.name}</span>
                           <span className="cement-type-tag">{c.tag}</span>
                         </div>
-                        <p className="cement-type-desc">{c.description}</p>
                         {isSelected && (
                           <div className="cement-type-check">
                             <Check className="w-3.5 h-3.5 text-white" />
@@ -651,7 +605,6 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
                           <span className="cement-type-name">{v.name}</span>
                           <span className="cement-type-tag">{v.tag}</span>
                         </div>
-                        <p className="cement-type-desc">{v.description}</p>
                         {isSelected && (
                           <div className="cement-type-check">
                             <Check className="w-3.5 h-3.5 text-white" />
@@ -691,7 +644,6 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
                           <span className="cement-type-name">{c.name}</span>
                           <span className="cement-type-tag">{c.tag}</span>
                         </div>
-                        <p className="cement-type-desc">{c.description}</p>
                         {isSelected && (
                           <div className="cement-type-check">
                             <Check className="w-3.5 h-3.5 text-white" />
@@ -732,8 +684,6 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
                         <span className="cement-type-name">{t.name}</span>
                         <span className="cement-type-tag">{t.tag}</span>
                       </div>
-                      <span className="cement-type-fullname">{t.fullName}</span>
-                      <p className="cement-type-desc">{t.description}</p>
                       {isSelected && (
                         <div className="cement-type-check">
                           <Check className="w-3.5 h-3.5 text-white" />

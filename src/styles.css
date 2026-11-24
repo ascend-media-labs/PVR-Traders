@@ -3993,7 +3993,7 @@
 
 .cement-type-card {
   text-align: left;
-  padding: 10px 12px;
+  padding: 12px 14px;
   border-radius: 12px;
   border: 1.5px solid #e2e8f0;
   background: #f8fafc;
@@ -4001,8 +4001,7 @@
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  align-items: center;
 }
 
 .cement-type-card:hover {
@@ -4022,7 +4021,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2px;
+  width: 100%;
+  gap: 8px;
+}
+
+.cement-type-card.selected .cement-type-top {
+  padding-right: 24px;
 }
 
 .cement-type-name {
@@ -4056,8 +4060,9 @@
 
 .cement-type-check {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 12px;
   width: 20px;
   height: 20px;
   border-radius: 9999px;
@@ -4899,7 +4904,7 @@
 /* 2-column layout */
 .in-page-columns {
   display: grid;
-  grid-template-columns: 360px 1fr;
+  grid-template-columns: 340px 1fr;
   gap: 24px;
   align-items: start;
   width: 100%;
@@ -4929,11 +4934,18 @@
 .in-page-photo-wrap {
   position: relative;
   width: 100%;
-  height: 200px;
-  border-radius: 14px;
+  height: 260px;
+  border-radius: 16px;
   overflow: hidden;
   background: #0f172a;
-  border: 1px solid #e2e8f0;
+  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.1);
+}
+
+@media (max-width: 1024px) {
+  .in-page-photo-wrap {
+    height: 210px;
+  }
 }
 
 .in-page-photo {
