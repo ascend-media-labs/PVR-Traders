@@ -66,7 +66,7 @@ export const images = {
 export const navigation = [
   { id: "home", path: "/", label: "Home" },
   { id: "about", path: "/about", label: "About Us" },
-  { id: "services", path: "/services", label: "Services" },
+  { id: "services", path: "/services", label: "Products" },
   { id: "clients", path: "/clients", label: "Clients" },
   { id: "projects", path: "/projects", label: "Project Categories" },
   { id: "contact", path: "/contact", label: "Contact Us" },
