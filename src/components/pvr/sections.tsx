@@ -45,14 +45,8 @@ import {
 } from "@/lib/pvr-content";
 
 export function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    el.classList.add("visible");
-  }, []);
   return (
-    <div ref={ref} className={`reveal visible ${className}`}>
+    <div className={`reveal visible ${className}`}>
       {children}
     </div>
   );
@@ -413,28 +407,9 @@ interface ServicesProps {
 }
 
 export function Services({ isStandalonePage = false }: ServicesProps) {
-  const [isServicesRoute, setIsServicesRoute] = useState(isStandalonePage);
+  const isServicesRoute = isStandalonePage;
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsServicesRoute(isStandalonePage || window.location.pathname.startsWith("/services"));
-    }
-  }, [isStandalonePage]);
-
-  const [selectedProductIndex, setSelectedProductIndex] = useState(() => {
-    if (typeof window !== "undefined") {
-      const urlParams = new URLSearchParams(window.location.search);
-      const urlProd = urlParams.get("product");
-      if (urlProd !== null && !isNaN(Number(urlProd))) {
-        return Number(urlProd);
-      }
-      const saved = sessionStorage.getItem("pvr_selected_product");
-      if (saved !== null && !isNaN(Number(saved))) {
-        return Number(saved);
-      }
-    }
-    return 0;
-  });
+  const [selectedProductIndex, setSelectedProductIndex] = useState(0);
 
   useEffect(() => {
     if (typeof window !== "undefined" && isServicesRoute) {

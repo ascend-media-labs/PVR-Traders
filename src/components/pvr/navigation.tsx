@@ -9,10 +9,12 @@ import { CartDrawer } from "@/components/pvr/cart-drawer";
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { totalItems, totalPackets, setIsCartOpen } = useCart();
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setScrolled(window.scrollY > 15);
     };
@@ -73,12 +75,12 @@ export function Navbar() {
           <button
             type="button"
             className="nav-cart-btn"
-            aria-label={`View Material Cart (${totalPackets} packets)`}
+            aria-label={mounted && totalPackets > 0 ? `View Material Cart (${totalPackets} packets)` : "View Material Cart"}
             title="View Material Cart"
             onClick={() => setIsCartOpen(true)}
           >
             <ShoppingCart className="w-5 h-5" />
-            {totalItems > 0 && (
+            {mounted && totalItems > 0 && (
               <span className="nav-cart-badge" key={totalPackets}>
                 {totalPackets}
               </span>
