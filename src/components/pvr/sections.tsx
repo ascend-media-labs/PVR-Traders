@@ -305,16 +305,11 @@ export function MaterialsCarousel() {
 
                 {/* Bottom Content Scrim */}
                 <div className="material-card-content">
-                  <div className="material-spec-pill">
-                    <span className="spec-dot" />
-                    <span>{item.spec}</span>
-                  </div>
                   <h3 className="material-card-title">{item.title}</h3>
-                  <p className="material-card-description">{item.description}</p>
 
                   <div className="material-card-footer">
-                    <span className="material-explore-link">
-                      <span>Explore Material Specs</span>
+                    <span className="material-book-btn">
+                      <span>Book Now</span>
                       <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                     </span>
                   </div>
