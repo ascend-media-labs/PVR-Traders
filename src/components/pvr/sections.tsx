@@ -602,7 +602,6 @@ export function Services({ isStandalonePage = false }: ServicesProps) {
                     <span>{item.spec}</span>
                   </div>
                   <h3 className="service-card-title">{item.title}</h3>
-                  <p className="service-card-desc">{item.description}</p>
                   <button
                     type="button"
                     className={`service-enquire-btn transition-all ${isSelected

@@ -1617,7 +1617,7 @@
 
 .service-photo-frame {
   position: relative;
-  height: 125px;
+  height: clamp(185px, 24vh, 215px);
   border-radius: 16px 5px 12px 12px;
   overflow: hidden;
   background: #0b1120;
@@ -1711,12 +1711,12 @@
 }
 
 .service-content {
-  padding: 8px 4px 2px;
+  padding: 10px 4px 4px;
   display: flex;
   flex-direction: column;
   flex: 1;
   justify-content: space-between;
-  gap: 4px;
+  gap: 8px;
 }
 
 .service-spec-pill {
@@ -3513,7 +3513,7 @@
   }
 
   .service-photo-frame {
-    height: 155px;
+    height: 185px;
   }
 
   .service-content {
