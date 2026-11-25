@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ProductDetailSection } from "@/components/pvr/product-detail-section";
-import { ArrowLeft, ArrowUpRight, ShoppingCart } from "lucide-react";
+import { ArrowLeft, ShoppingCart } from "lucide-react";
 import { materials } from "@/lib/pvr-content";
 import { useCart } from "@/lib/cart-context";
 import { CartDrawer } from "@/components/pvr/cart-drawer";
@@ -71,13 +71,6 @@ function ProductDetailPage() {
               <span className="hidden sm:inline">Material Cart</span>
               {totalItems > 0 && <span className="cart-pill-count">{totalItems}</span>}
             </button>
-            <Link
-              to="/contact"
-              className="product-detail-support-link"
-            >
-              <span>Need Custom Supply Support?</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </Link>
           </div>
         </div>
       </header>
