@@ -110,6 +110,27 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  p,
+  .section-description,
+  .about-lead,
+  .about-copy p,
+  .hero p,
+  .why-card-desc,
+  .service-card p,
+  .material-card-description {
+    text-align: justify;
+    text-justify: inter-word;
+    text-align-last: left;
+  }
+
+  .text-center,
+  .text-center p,
+  .center-heading .section-description,
+  .contact-header-center .section-description {
+    text-align: center;
+    text-align-last: center;
+  }
+
   h1,
   h2,
   h3,
