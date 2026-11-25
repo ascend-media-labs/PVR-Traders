@@ -96,10 +96,29 @@ export function CartDrawer() {
                       </button>
                     </div>
 
-                    <div className="cart-item-type-badge">
-                      <span>{item.unit === "Bars" ? "SIZE:" : item.unit === "Loads" || item.unit === "Load" ? "VEHICLE:" : "TYPE:"}</span>
-                      <strong>{item.type}</strong>
-                    </div>
+                    {item.type.includes(" • ") ? (
+                      <div className="cart-item-type-badge multi-line">
+                        <div className="cart-badge-row">
+                          <span className="cart-badge-lbl">TYPE:</span>
+                          <strong>{item.type.split(" • ")[0]}</strong>
+                        </div>
+                        <div className="cart-badge-row">
+                          <span className="cart-badge-lbl">VEHICLE:</span>
+                          <strong>{item.type.split(" • ")[1]}</strong>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="cart-item-type-badge">
+                        <span>
+                          {item.unit === "Bars"
+                            ? "SIZE:"
+                            : item.unit === "Loads" || item.unit === "Load"
+                              ? "VEHICLE:"
+                              : "TYPE:"}
+                        </span>
+                        <strong>{item.type}</strong>
+                      </div>
+                    )}
 
                     <div className="cart-item-qty-row">
                       <span className="cart-qty-label">Quantity:</span>
