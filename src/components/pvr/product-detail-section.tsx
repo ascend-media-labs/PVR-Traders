@@ -432,11 +432,11 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
 
       {/* Main Detail Header */}
       <div className="product-detail-hero-header">
+        <h2 className="product-detail-main-title">{currentProduct.title}</h2>
         <div className="product-detail-badge">
           <span className="badge-glow-dot" />
           <span>Product Specifications & Direct Procurement</span>
         </div>
-        <h2 className="product-detail-main-title">{currentProduct.title}</h2>
       </div>
 
       {/* 2-Column Responsive Body */}
@@ -458,7 +458,7 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
 
         {/* Right Column: Interactive Order Configurator */}
         <div className="in-page-options-col">
-          {/* Case 1: Sand Supply (Cascading: Type -> Vehicle -> Capacity -> Loads) */}
+          {/* Case 1: Sand Supply (Cascading: Type -> Vehicle & Capacity Side-by-Side -> Loads) */}
           {currentProduct.hasSandTypes && currentProduct.sandTypes && (
             <>
               {/* Step 1: Sand Type */}
@@ -498,87 +498,90 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
                 </div>
               </div>
 
-              {/* Step 2: Delivery Vehicle */}
-              <div className="cement-step-block">
-                <div className="cement-step-label-row">
-                  <span className="cement-step-num">2</span>
-                  <h4 className="cement-step-title">Select Delivery Vehicle</h4>
-                  {selectedVehicle && (
-                    <span className="cement-selected-badge">
-                      Vehicle: <strong>{selectedVehicle}</strong>
-                    </span>
-                  )}
-                </div>
+              {/* Step 2 & 3: Delivery Vehicle and Capacity Side-by-Side */}
+              <div className="cascading-vehicle-grid">
+                {/* Step 2: Delivery Vehicle */}
+                <div className="cement-step-block">
+                  <div className="cement-step-label-row">
+                    <span className="cement-step-num">2</span>
+                    <h4 className="cement-step-title">Select Delivery Vehicle</h4>
+                    {selectedVehicle && (
+                      <span className="cement-selected-badge">
+                        Vehicle: <strong>{selectedVehicle}</strong>
+                      </span>
+                    )}
+                  </div>
 
-                <div className="cement-type-grid" style={{ gridTemplateColumns: "repeat(2, 1fr)" }}>
-                  {VEHICLE_OPTIONS.map((v) => {
-                    const isSelected = selectedVehicle === v.id;
-                    return (
-                      <button
-                        key={v.id}
-                        type="button"
-                        className={`cement-type-card ${isSelected ? "selected" : ""}`}
-                        onClick={() => handleVehicleSelect(v.id)}
-                      >
-                        <div className="cement-type-top">
-                          <span className="cement-type-name">{v.name}</span>
-                          <span className="cement-type-tag">{v.tag}</span>
-                        </div>
-                        {isSelected && (
-                          <div className="cement-type-check">
-                            <Check className="w-3.5 h-3.5 text-white" />
+                  <div className="cement-type-grid" style={{ gridTemplateColumns: "repeat(2, 1fr)" }}>
+                    {VEHICLE_OPTIONS.map((v) => {
+                      const isSelected = selectedVehicle === v.id;
+                      return (
+                        <button
+                          key={v.id}
+                          type="button"
+                          className={`cement-type-card ${isSelected ? "selected" : ""}`}
+                          onClick={() => handleVehicleSelect(v.id)}
+                        >
+                          <div className="cement-type-top">
+                            <span className="cement-type-name">{v.name}</span>
+                            <span className="cement-type-tag">{v.tag}</span>
                           </div>
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Step 3: Vehicle Capacity */}
-              <div className="cement-step-block">
-                <div className="cement-step-label-row">
-                  <span className="cement-step-num">3</span>
-                  <h4 className="cement-step-title">
-                    {selectedVehicle === "Lorry" ? "Select Lorry Tyres / Capacity" : "Select Tractor Body Type"}
-                  </h4>
-                  {selectedCapacity && (
-                    <span className="cement-selected-badge">
-                      Capacity: <strong>{selectedCapacity}</strong>
-                    </span>
-                  )}
+                          {isSelected && (
+                            <div className="cement-type-check">
+                              <Check className="w-3.5 h-3.5 text-white" />
+                            </div>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
 
-                <div className="cement-type-grid" style={{ gridTemplateColumns: "repeat(2, 1fr)" }}>
-                  {capacityOptions.map((c) => {
-                    const isSelected = selectedCapacity === c.id;
-                    return (
-                      <button
-                        key={c.id}
-                        type="button"
-                        className={`cement-type-card ${isSelected ? "selected" : ""}`}
-                        onClick={() => handleCapacitySelect(c.id)}
-                      >
-                        <div className="cement-type-top">
-                          <span className="cement-type-name">{c.name}</span>
-                          <span className="cement-type-tag">{c.tag}</span>
-                        </div>
-                        {isSelected && (
-                          <div className="cement-type-check">
-                            <Check className="w-3.5 h-3.5 text-white" />
+                {/* Step 3: Vehicle Capacity */}
+                <div className="cement-step-block">
+                  <div className="cement-step-label-row">
+                    <span className="cement-step-num">3</span>
+                    <h4 className="cement-step-title">
+                      {selectedVehicle === "Lorry" ? "Lorry Tyres / Capacity" : "Tractor Body Type"}
+                    </h4>
+                    {selectedCapacity && (
+                      <span className="cement-selected-badge">
+                        Capacity: <strong>{selectedCapacity}</strong>
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="cement-type-grid" style={{ gridTemplateColumns: "repeat(2, 1fr)" }}>
+                    {capacityOptions.map((c) => {
+                      const isSelected = selectedCapacity === c.id;
+                      return (
+                        <button
+                          key={c.id}
+                          type="button"
+                          className={`cement-type-card ${isSelected ? "selected" : ""}`}
+                          onClick={() => handleCapacitySelect(c.id)}
+                        >
+                          <div className="cement-type-top">
+                            <span className="cement-type-name">{c.name}</span>
+                            <span className="cement-type-tag">{c.tag}</span>
                           </div>
-                        )}
-                      </button>
-                    );
-                  })}
+                          {isSelected && (
+                            <div className="cement-type-check">
+                              <Check className="w-3.5 h-3.5 text-white" />
+                            </div>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </>
           )}
 
-          {/* Case 2: Crusher Chips & Cement Bricks (Vehicle -> Capacity -> Loads) */}
+          {/* Case 2: Crusher Chips & Cement Bricks (Vehicle & Capacity Side-by-Side -> Loads) */}
           {currentProduct.isCascadingVehicle && !currentProduct.hasSandTypes && (
-            <>
+            <div className="cascading-vehicle-grid">
               {/* Step 1: Delivery Vehicle */}
               <div className="cement-step-block">
                 <div className="cement-step-label-row">
@@ -621,7 +624,7 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
                 <div className="cement-step-label-row">
                   <span className="cement-step-num">2</span>
                   <h4 className="cement-step-title">
-                    {selectedVehicle === "Lorry" ? "Select Lorry Tyres / Capacity" : "Select Tractor Body Type"}
+                    {selectedVehicle === "Lorry" ? "Lorry Tyres / Capacity" : "Tractor Body Type"}
                   </h4>
                   {selectedCapacity && (
                     <span className="cement-selected-badge">
@@ -654,7 +657,7 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
                   })}
                 </div>
               </div>
-            </>
+            </div>
           )}
 
           {/* Case 3: Cement Supply & Iron Steel (Direct Types / Sizes) */}
@@ -704,26 +707,8 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
               <h4 className="cement-step-title">Enter Quantity ({currentProduct.unit})</h4>
             </div>
 
-            {/* Quick Presets */}
-            <div className="cement-preset-row">
-              <span className="cement-preset-label">Quick Select {currentProduct.unit}:</span>
-              <div className="cement-preset-pills">
-                {currentProduct.presetQuantities.map((qty) => (
-                  <button
-                    key={qty}
-                    type="button"
-                    className={`cement-preset-btn ${quantity === qty ? "active" : ""}`}
-                    onClick={() => handlePresetQuantity(qty)}
-                  >
-                    {qty} {qty === 1 && currentProduct.unit === "Loads" ? "Load" : currentProduct.unit}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Custom Numeric Stepper */}
-            <div className="cement-quantity-input-box">
-              <span className="cement-qty-field-label">Custom Quantity (Type or search any number):</span>
+            {/* Quick Presets & Stepper in One Compact Row */}
+            <div className="cement-qty-controls-row">
               <div className="cement-stepper-wrap">
                 <button
                   type="button"
@@ -731,7 +716,7 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
                   aria-label="Decrease quantity"
                   onClick={handleDecrement}
                 >
-                  <Minus className="w-4 h-4" />
+                  <Minus className="w-3.5 h-3.5" />
                 </button>
                 <input
                   type="number"
@@ -741,7 +726,7 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
                   value={customInputValue}
                   onChange={handleInputChange}
                   className="cement-qty-input"
-                  placeholder="e.g. 10, 25, 100..."
+                  placeholder="e.g. 10..."
                 />
                 <button
                   type="button"
@@ -749,14 +734,33 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
                   aria-label="Increase quantity"
                   onClick={handleIncrement}
                 >
-                  <Plus className="w-4 h-4" />
+                  <Plus className="w-3.5 h-3.5" />
                 </button>
                 <span className="cement-qty-unit-label">
                   {currentProduct.isCascadingVehicle ? selectedVehicle : ""} {quantity === 1 && currentProduct.unit === "Loads" ? "Load" : currentProduct.unit}
                 </span>
               </div>
-            </div>
 
+              <div className="cement-preset-row">
+                <span className="cement-preset-label">Quick:</span>
+                <div className="cement-preset-pills">
+                  {currentProduct.presetQuantities.map((qty) => (
+                    <button
+                      key={qty}
+                      type="button"
+                      className={`cement-preset-btn ${quantity === qty ? "active" : ""}`}
+                      onClick={() => handlePresetQuantity(qty)}
+                    >
+                      {qty} {qty === 1 && currentProduct.unit === "Loads" ? "Load" : currentProduct.unit}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Unified Bottom Bar: Live Summary + Add to Cart Button */}
+          <div className="in-page-bottom-bar">
             {/* Live Order Summary */}
             <div className="cement-order-summary-box">
               <div className="cement-summary-icon">
@@ -772,40 +776,40 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
                 </span>
               </div>
             </div>
-          </div>
 
-          {/* Action Row & Add to Cart */}
-          <div className="in-page-action-container">
-            {isSuccess ? (
-              <div className="cement-success-bar in-page-success-bar">
-                <div className="cement-success-message">
-                  <Check className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                  <span>
-                    Added <strong>{quantity} {quantity === 1 && currentProduct.unit === "Loads" ? "Load" : currentProduct.unit} of {currentProduct.title}</strong> to your Cart!
-                  </span>
+            {/* Action Row & Add to Cart */}
+            <div className="in-page-action-container">
+              {isSuccess ? (
+                <div className="cement-success-bar in-page-success-bar">
+                  <div className="cement-success-message">
+                    <Check className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                    <span>
+                      Added <strong>{quantity} {quantity === 1 && currentProduct.unit === "Loads" ? "Load" : currentProduct.unit} of {currentProduct.title}</strong> to your Cart!
+                    </span>
+                  </div>
+                  <div className="cement-success-actions">
+                    <Button
+                      size="sm"
+                      className="in-page-view-cart-btn text-white font-semibold"
+                      onClick={() => setIsCartOpen(true)}
+                    >
+                      <ShoppingCart className="w-3.5 h-3.5 mr-1.5" />
+                      View Material Cart
+                    </Button>
+                  </div>
                 </div>
-                <div className="cement-success-actions">
-                  <Button
-                    size="sm"
-                    className="in-page-view-cart-btn text-white font-semibold"
-                    onClick={() => setIsCartOpen(true)}
-                  >
-                    <ShoppingCart className="w-3.5 h-3.5 mr-1.5" />
-                    View Material Cart
+              ) : (
+                <div className="in-page-submit-row">
+                  <Button className="cement-add-btn in-page-add-btn" onClick={handleAddToCart}>
+                    <ShoppingCart className="w-4 h-4 mr-2" />
+                    <span>
+                      Add {quantity} {quantity === 1 && currentProduct.unit === "Loads" ? "Load" : currentProduct.unit} to Cart
+                    </span>
+                    <ChevronRight className="w-4 h-4 ml-1.5 opacity-80" />
                   </Button>
                 </div>
-              </div>
-            ) : (
-              <div className="in-page-submit-row">
-                <Button className="cement-add-btn in-page-add-btn" onClick={handleAddToCart}>
-                  <ShoppingCart className="w-4 h-4 mr-2" />
-                  <span>
-                    Add {quantity} {quantity === 1 && currentProduct.unit === "Loads" ? "Load" : currentProduct.unit} to Cart
-                  </span>
-                  <ChevronRight className="w-4 h-4 ml-1.5 opacity-80" />
-                </Button>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
