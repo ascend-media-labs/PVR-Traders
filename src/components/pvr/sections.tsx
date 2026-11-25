@@ -125,7 +125,7 @@ export function Hero() {
           <h1 key={`title-${current}`}>
             {slide.title.map((line, i) => (
               <span key={i} className={i === slide.title.length - 1 ? "hero-highlight" : ""}>
-                {i > 0 ? ` ${line}` : line}
+                {line}
               </span>
             ))}
           </h1>

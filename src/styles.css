@@ -599,11 +599,13 @@
   max-width: 860px;
   font-size: clamp(28px, 3.4vw, 44px);
   font-weight: 800;
-  line-height: 1.16;
+  line-height: 1.18;
   letter-spacing: -0.02em;
   margin: 0;
   color: #ffffff;
   text-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .hero h1 span {
@@ -3722,7 +3724,7 @@
   }
 
   .hero h1 span {
-    display: inline;
+    display: block;
   }
 
   .hero-eyebrow {

@@ -6,7 +6,7 @@ export const heroSlides = [
     image: "/images/hero/hero-1.jpg",
     alt: "Heavy construction infrastructure site with machinery and structural foundations",
     eyebrow: "Your foundation. Our commitment.",
-    title: ["Building Strong Foundations", "for a Better Tomorrow."],
+    title: ["Building Strong", "Foundations for a", "Better Tomorrow."],
     description:
       "Your Trusted Partner for Quality Construction Materials. Delivering reliable materials, superior quality, and dependable service for every construction project.",
     tag: "PVR TRADERS / CONSTRUCTION MATERIALS",
@@ -17,7 +17,7 @@ export const heroSlides = [
     image: "/images/iron-steel-supply.jpg",
     alt: "High-grade reinforcement steel and iron TMT bars on construction site",
     eyebrow: "Strength & Durability",
-    title: ["Premium Iron & Steel Supplies", "for Heavy Structural Builds."],
+    title: ["Premium Iron & Steel", "Supplies for Heavy", "Structural Builds."],
     description:
       "Engineered reinforcement steel and TMT bars manufactured for extreme load capacities and seismic safety across commercial and residential structures.",
     tag: "IRON & STEEL SUPPLY",
@@ -28,7 +28,7 @@ export const heroSlides = [
     image: "/images/cement-supply.jpg",
     alt: "Top quality cement supply and active concrete construction work",
     eyebrow: "Dependable Bonding",
-    title: ["High-Grade Cement for Lasting Strength", "& Solid Foundations."],
+    title: ["High-Grade Cement", "for Lasting Strength", "& Solid Foundations."],
     description:
       "Direct supply of certified cement brands with proven compressive strength, fast setting times, and reliable bulk delivery to your site.",
     tag: "CEMENT SUPPLY",
@@ -39,7 +39,7 @@ export const heroSlides = [
     image: "/images/sand-supply.jpg",
     alt: "Filtered sand quarry and crusher chips aggregate materials",
     eyebrow: "Screened & Graded",
-    title: ["Quality Sand & Durable Crusher Chips", "Ready for Concrete."],
+    title: ["Quality Sand &", "Durable Crusher Chips", "Ready for Concrete."],
     description:
       "High-grade filtered river and manufactured sand alongside precision-graded crushed stone aggregates for concrete work, masonry, and road projects.",
     tag: "SAND & CRUSHER CHIPS",
@@ -50,7 +50,7 @@ export const heroSlides = [
     image: "/images/cement-bricks-supply.jpg",
     alt: "Modern architecture and robust cement bricks building construction",
     eyebrow: "Precision Manufacturing",
-    title: ["Strong Cement Bricks for Resilient Walls", "& Modern Structures."],
+    title: ["Strong Cement Bricks", "for Resilient Walls", "& Modern Structures."],
     description:
       "High-density concrete bricks and solid blocks ensuring superior thermal insulation, dimensional accuracy, and lifelong wall strength.",
     tag: "CEMENT BRICKS SUPPLY",
