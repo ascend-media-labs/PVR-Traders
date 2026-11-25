@@ -5,7 +5,6 @@ import { ArrowLeft, ShoppingCart } from "lucide-react";
 import { materials } from "@/lib/pvr-content";
 import { useCart } from "@/lib/cart-context";
 import { CartDrawer } from "@/components/pvr/cart-drawer";
-import { FloatingContactActions } from "@/components/pvr/navigation";
 
 export const Route = createFileRoute("/product-detail")({
   head: () => ({
@@ -68,7 +67,7 @@ function ProductDetailPage() {
               aria-label="View Material Cart"
             >
               <ShoppingCart className="w-3.5 h-3.5 text-sky-600" />
-              <span className="hidden sm:inline">Material Cart</span>
+              <span>Material Cart</span>
               {totalItems > 0 && <span className="cart-pill-count">{totalItems}</span>}
             </button>
           </div>
@@ -86,7 +85,6 @@ function ProductDetailPage() {
       </main>
 
       <CartDrawer />
-      <FloatingContactActions />
     </div>
   );
 }

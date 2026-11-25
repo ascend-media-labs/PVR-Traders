@@ -5431,18 +5431,6 @@
   box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
 }
 
-@media (max-width: 640px) {
-  .product-switcher-bar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
-
-  .product-tabs-scroll {
-    width: 100%;
-  }
-}
-
 /* 2-column layout */
 .in-page-columns {
   display: grid;
@@ -5459,14 +5447,14 @@
 @media (max-width: 1024px) {
   .in-page-columns {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 10px;
   }
 }
 
 .in-page-product-col {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   background: transparent;
   border: none;
   border-radius: 0;
@@ -5490,7 +5478,14 @@
 
 @media (max-width: 1024px) {
   .in-page-photo-wrap {
-    height: 200px;
+    height: 135px;
+  }
+}
+
+@media (max-width: 640px) {
+  .in-page-photo-wrap {
+    height: 110px;
+    border-radius: 10px;
   }
 }
 
@@ -5592,22 +5587,22 @@
 }
 
 .product-in-detail-suite .cement-type-grid {
-  gap: 5px;
+  gap: 5px !important;
 }
 
 .product-in-detail-suite .cement-type-card {
-  padding: 5px 8px;
-  border-radius: 8px;
-  min-height: 32px;
+  padding: 6px 10px !important;
+  border-radius: 8px !important;
+  min-height: 34px !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
 .product-in-detail-suite .cement-type-name {
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.product-in-detail-suite .cement-type-tag {
-  font-size: 9.5px;
+  font-size: 12.5px !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
 }
 
 .product-in-detail-suite .cement-preset-row {
