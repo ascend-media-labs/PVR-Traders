@@ -40,7 +40,6 @@ import {
   getContactSubmissionResult,
   clientPartners,
   clientStats,
-  clientBrands,
 } from "@/lib/pvr-content";
 
 export function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
@@ -659,18 +658,6 @@ export function Clients() {
           ))}
         </div>
 
-        {/* Client network ticker */}
-        <div className="clients-ticker-wrap">
-          <span className="clients-ticker-label">CLIENT NETWORK:</span>
-          <div className="clients-ticker-tags">
-            {clientBrands.map((b) => (
-              <span className="client-ticker-pill" key={b}>
-                <BadgeCheck className="w-3.5 h-3.5 text-sky-500 inline mr-1" />
-                {b}
-              </span>
-            ))}
-          </div>
-        </div>
       </Reveal>
     </section>
   );
