@@ -86,6 +86,7 @@ export const clientPartners = [
     materialSupplied: "OPC 53 Cement & Fe-550D TMT",
     badge: "Tier-1 Developer",
     scope: "Residential Towers",
+    image: "/images/clients/client-apex.jpg",
   },
   {
     name: "Varun Civil & Highways",
@@ -93,6 +94,7 @@ export const clientPartners = [
     materialSupplied: "River Sand & 20/40mm Crusher Chips",
     badge: "Govt Infrastructure",
     scope: "Roadways & Bridges",
+    image: "/images/clients/client-varun.jpg",
   },
   {
     name: "Sri Krishna Commercial Hubs",
@@ -100,6 +102,7 @@ export const clientPartners = [
     materialSupplied: "High-Grade Cement & Structural Steel",
     badge: "Commercial Builder",
     scope: "Commercial Complexes",
+    image: "/images/clients/client-srikrishna.jpg",
   },
   {
     name: "Vanguard Industrial EPC",
@@ -107,6 +110,7 @@ export const clientPartners = [
     materialSupplied: "Solid Cement Bricks & Heavy Aggregates",
     badge: "Industrial Contractor",
     scope: "Logistics & Plants",
+    image: "/images/clients/client-vanguard.jpg",
   },
   {
     name: "Deccan Urban Builders",
@@ -114,6 +118,7 @@ export const clientPartners = [
     materialSupplied: "Sub-Base Aggregates & M-Sand",
     badge: "Civic Infrastructure",
     scope: "Urban Development",
+    image: "/images/clients/client-deccan.jpg",
   },
   {
     name: "Greenfield Real Estates",
@@ -121,6 +126,7 @@ export const clientPartners = [
     materialSupplied: "Full Batch Supply (Cement, Sand, Bricks)",
     badge: "Housing Developer",
     scope: "Premium Estates",
+    image: "/images/clients/client-greenfield.jpg",
   },
 ];
 

@@ -623,11 +623,11 @@ export function Clients() {
           <div className="min-w-0">
             <div className="premium-section-badge mb-2">
               <span className="badge-glow-dot" />
-              <span>Trusted Partnerships</span>
+              <span>Clients</span>
             </div>
-            <h2 className="section-heading">Trusted by Leading Builders & Contractors.</h2>
+            <h2 className="section-heading">Clients</h2>
             <p className="section-description">
-              Dependable material supply for landmark residential, commercial, industrial, and infrastructure developments.
+              Trusted by leading builders, contractors, and developers across residential, commercial, industrial, and infrastructure developments.
             </p>
           </div>
           <Link
@@ -654,17 +654,30 @@ export function Clients() {
         <div className="clients-grid">
           {clientPartners.map((item) => (
             <article className="client-card group" key={item.name}>
-              <div className="client-card-top">
-                <div className="client-card-icon">
-                  <Building2 className="w-4 h-4 text-sky-500" />
-                </div>
+              <div className="client-card-image-wrap">
+                <img
+                  src={item.image}
+                  alt={`${item.name} construction project`}
+                  loading="lazy"
+                  className="client-card-img"
+                />
+                <div className="client-card-image-overlay" />
                 <span className="client-badge">{item.badge}</span>
               </div>
-              <h3 className="client-name">{item.name}</h3>
-              <p className="client-category">{item.category}</p>
-              <div className="client-supply-pill">
-                <span className="client-dot" />
-                <span className="client-supply-text">{item.materialSupplied}</span>
+              <div className="client-card-body">
+                <div className="client-card-header">
+                  <div className="client-card-icon">
+                    <Building2 className="w-4 h-4 text-sky-500" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="client-name">{item.name}</h3>
+                    <p className="client-category">{item.category}</p>
+                  </div>
+                </div>
+                <div className="client-supply-pill">
+                  <span className="client-dot" />
+                  <span className="client-supply-text">{item.materialSupplied}</span>
+                </div>
               </div>
             </article>
           ))}
