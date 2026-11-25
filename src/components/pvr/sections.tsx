@@ -589,10 +589,6 @@ export function Services({ isStandalonePage = false }: ServicesProps) {
                   </div>
                 </div>
                 <div className="service-content">
-                  <div className="service-spec-pill">
-                    <span className="spec-dot" />
-                    <span>{item.spec}</span>
-                  </div>
                   <h3 className="service-card-title">{item.title}</h3>
                   <button
                     type="button"
