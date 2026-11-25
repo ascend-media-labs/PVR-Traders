@@ -5713,51 +5713,31 @@
 }
 
 /* ==========================================================================
-   DEDICATED FULLSCREEN PRODUCT DETAIL WORKSPACE
+   PRODUCT DETAIL PAGE MAIN & SUBNAV
    ========================================================================== */
-.product-detail-fullscreen-shell {
-  min-height: 100vh;
-  min-height: 100dvh;
+.product-detail-page-main {
   background: #ffffff;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100% !important;
-  max-width: 100% !important;
-  overflow-x: hidden !important;
+  padding-bottom: 28px;
+  width: 100%;
   box-sizing: border-box;
 }
 
-@media (min-width: 1025px) {
-  .product-detail-fullscreen-shell {
-    height: 100vh;
-    height: 100dvh;
-    overflow: hidden;
-  }
-}
-
-.product-detail-top-bar {
-  height: 48px;
+.product-detail-subnav {
+  height: 44px;
   background: #ffffff;
   border-bottom: 1px solid #e2e8f0;
   display: flex;
   align-items: center;
-  flex-shrink: 0;
-  z-index: 20;
-  width: 100% !important;
-  max-width: 100% !important;
-  overflow-x: hidden;
+  margin-bottom: 12px;
+  width: 100%;
   box-sizing: border-box;
 }
 
-.product-detail-top-inner {
+.product-detail-subnav-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
 }
 
 .product-detail-back-pill {

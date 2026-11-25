@@ -1,10 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ProductDetailSection } from "@/components/pvr/product-detail-section";
-import { ArrowLeft, ShoppingCart } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { materials } from "@/lib/pvr-content";
-import { useCart } from "@/lib/cart-context";
-import { CartDrawer } from "@/components/pvr/cart-drawer";
+import { Navbar, Footer, FloatingContactActions } from "@/components/pvr/navigation";
 
 export const Route = createFileRoute("/product-detail")({
   head: () => ({
@@ -22,7 +21,6 @@ export const Route = createFileRoute("/product-detail")({
 
 function ProductDetailPage() {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const { totalItems, setIsCartOpen } = useCart();
 
   useEffect(() => {
     // Read from search query (?product=X) or sessionStorage
@@ -48,34 +46,30 @@ function ProductDetailPage() {
   };
 
   return (
-    <div className="product-detail-fullscreen-shell">
-      {/* Sleek Top Navigation Bar */}
-      <header className="product-detail-top-bar">
-        <div className="container-width product-detail-top-inner">
-          <Link
-            to="/services"
-            className="product-detail-back-pill"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Back to All Products</span>
-          </Link>
-          <div className="flex items-center gap-2.5 sm:gap-4">
-            <button
-              type="button"
-              className="product-detail-cart-pill"
-              onClick={() => setIsCartOpen(true)}
-              aria-label="View Material Cart"
+    <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-background focus:p-4"
+      >
+        Skip to content
+      </a>
+      <Navbar />
+
+      <main id="main-content" className="product-detail-page-main">
+        {/* Sleek Sub Navigation / Back Link */}
+        <div className="product-detail-subnav">
+          <div className="container-width product-detail-subnav-inner">
+            <Link
+              to="/services"
+              className="product-detail-back-pill"
             >
-              <ShoppingCart className="w-3.5 h-3.5 text-sky-600" />
-              <span>Material Cart</span>
-              {totalItems > 0 && <span className="cart-pill-count">{totalItems}</span>}
-            </button>
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Back to All Products</span>
+            </Link>
           </div>
         </div>
-      </header>
 
-      {/* Main Full-Viewport Configurator Workspace */}
-      <main id="main-content" className="product-detail-workspace">
+        {/* Main Configurator Workspace */}
         <div className="container-width product-detail-workspace-inner">
           <ProductDetailSection
             selectedIndex={selectedIndex}
@@ -84,7 +78,8 @@ function ProductDetailPage() {
         </div>
       </main>
 
-      <CartDrawer />
-    </div>
+      <Footer />
+      <FloatingContactActions />
+    </>
   );
 }
