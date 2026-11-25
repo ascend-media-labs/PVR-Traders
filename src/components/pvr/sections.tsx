@@ -851,14 +851,19 @@ export function WhyChooseUs() {
               </div>
 
               <div className="why-card-body">
-                <span className="why-tag-pill">{tag}</span>
+                <div className="why-tag-pill">
+                  <span className="why-tag-dot" />
+                  <span>{tag}</span>
+                </div>
                 <h3 className="why-card-title">{title}</h3>
                 <p className="why-card-desc">{description}</p>
               </div>
 
               <div className="why-card-footer">
                 <div className="why-benefit-pill">
-                  <Check className="w-3.5 h-3.5 text-sky-600 flex-shrink-0" />
+                  <div className="why-check-circle">
+                    <Check className="w-3 h-3 stroke-[2.5]" />
+                  </div>
                   <span>{benefit}</span>
                 </div>
               </div>
