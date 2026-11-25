@@ -200,7 +200,6 @@ export function CementProductModal({ isOpen, onClose, cementImage = "/images/cem
                     >
                       <div className="cement-type-top">
                         <span className="cement-type-name">{t.id}</span>
-                        <span className="cement-type-tag">{t.tag}</span>
                       </div>
                       <span className="cement-type-fullname">{t.name}</span>
                       <p className="cement-type-desc">{t.description}</p>

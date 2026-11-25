@@ -682,7 +682,6 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
                     >
                       <div className="cement-type-top">
                         <span className="cement-type-name">{t.name}</span>
-                        <span className="cement-type-tag">{t.tag}</span>
                       </div>
                       {isSelected && (
                         <div className="cement-type-check">
