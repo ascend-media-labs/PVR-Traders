@@ -98,18 +98,16 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 105px;
-    max-width: 100% !important;
-    width: 100% !important;
-    overflow-x: hidden !important;
+    max-width: 100%;
+    width: 100%;
     position: relative;
     box-sizing: border-box;
   }
 
   body {
     margin: 0;
-    max-width: 100% !important;
-    width: 100% !important;
-    overflow-x: hidden !important;
+    max-width: 100%;
+    width: 100%;
     position: relative;
     background: var(--background);
     color: var(--foreground);
@@ -118,11 +116,16 @@
     box-sizing: border-box;
   }
 
-  #root,
+  #root {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
   #main-content {
-    max-width: 100% !important;
-    width: 100% !important;
-    overflow-x: clip !important;
+    max-width: 100%;
+    width: 100%;
+    overflow-x: clip;
     box-sizing: border-box;
   }
 
@@ -227,13 +230,13 @@
 
 .site-nav {
   height: 78px;
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
-  width: 100% !important;
-  max-width: 100% !important;
-  overflow-x: clip !important;
+  width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
   z-index: 1000;
   background: rgba(255, 255, 255, 0.65);
@@ -3510,6 +3513,10 @@
 
   .site-nav {
     height: 72px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
   }
 
   #home,
