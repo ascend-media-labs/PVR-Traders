@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Navbar, Footer, FloatingContactActions } from "@/components/pvr/navigation";
 import {
@@ -32,6 +33,10 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 function Index() {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, []);
+
   return (
     <>
       <a

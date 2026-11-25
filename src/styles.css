@@ -408,9 +408,12 @@
 .hero {
   position: relative;
   z-index: 1;
-  min-height: 500px;
+  min-height: 520px;
+  min-height: calc(100vh - 148px);
+  min-height: calc(100dvh - 148px);
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
   color: #ffffff;
   overflow: hidden;
 }
