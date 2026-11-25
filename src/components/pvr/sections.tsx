@@ -639,6 +639,18 @@ export function Services({ isStandalonePage = false }: ServicesProps) {
   );
 }
 export function Clients() {
+  const clientsContainerRef = useRef<HTMLDivElement>(null);
+
+  const scrollClients = (direction: "left" | "right") => {
+    if (clientsContainerRef.current) {
+      const scrollAmount = 350;
+      clientsContainerRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <section id="clients" className="section-space clients-section" aria-label="Our Clients">
       <Reveal className="container-width">
@@ -653,14 +665,34 @@ export function Clients() {
               Trusted by leading builders, contractors, and developers across residential, commercial, industrial, and infrastructure developments.
             </p>
           </div>
-          <Link
-            className="header-discuss-pill"
-            to="/contact"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          >
-            <span>Partner With Us</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </Link>
+          <div className="flex items-center gap-2.5">
+            <div className="carousel-nav-arrows">
+              <button
+                type="button"
+                className="carousel-arrow-btn"
+                onClick={() => scrollClients("left")}
+                aria-label="Scroll clients left"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                type="button"
+                className="carousel-arrow-btn"
+                onClick={() => scrollClients("right")}
+                aria-label="Scroll clients right"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+            <Link
+              className="header-discuss-pill"
+              to="/contact"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            >
+              <span>Partner With Us</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
 
         {/* Client stats strip */}
@@ -673,8 +705,8 @@ export function Clients() {
           ))}
         </div>
 
-        {/* Client cards grid */}
-        <div className="clients-grid">
+        {/* Client cards single-line horizontal scroll track */}
+        <div className="clients-grid" ref={clientsContainerRef}>
           {clientPartners.map((item) => (
             <article className="client-card group" key={item.name}>
               <div className="client-card-image-wrap">
