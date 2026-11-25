@@ -324,9 +324,6 @@ export function Footer() {
                   pvrtraders@gmail.com
                 </a>
               </li>
-              <li>
-                <span className="text-slate-400 text-xs leading-relaxed">Depot: 16°39'28.2"N 80°57'44.0"E</span>
-              </li>
             </ul>
           </div>
         </div>
