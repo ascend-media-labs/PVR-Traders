@@ -437,34 +437,56 @@ export function Services({ isStandalonePage = false }: ServicesProps) {
       let t3: NodeJS.Timeout | undefined;
       let t4: NodeJS.Timeout | undefined;
 
-      if (isFromBookNow) {
-        const scrollToProduct = () => {
-          const el = document.getElementById("product-detail-section");
-          if (el) {
-            const navHeight = 84;
-            const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
-            const offsetPosition = Math.max(0, elementPosition - navHeight);
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: "instant",
-            });
-          }
-        };
+      const scrollToProduct = (smooth = false) => {
+        const el = document.getElementById("product-detail-section");
+        if (el) {
+          const navHeight = 84;
+          const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = Math.max(0, elementPosition - navHeight);
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: smooth ? "smooth" : "instant",
+          });
+        }
+      };
 
+      if (isFromBookNow) {
         // Run immediately and across initial frame intervals to guarantee exact position
-        scrollToProduct();
-        requestAnimationFrame(scrollToProduct);
-        t1 = setTimeout(scrollToProduct, 60);
-        t2 = setTimeout(scrollToProduct, 160);
-        t3 = setTimeout(scrollToProduct, 350);
-        t4 = setTimeout(scrollToProduct, 600);
+        scrollToProduct(false);
+        requestAnimationFrame(() => scrollToProduct(false));
+        t1 = setTimeout(() => scrollToProduct(false), 60);
+        t2 = setTimeout(() => scrollToProduct(false), 160);
+        t3 = setTimeout(() => scrollToProduct(false), 350);
+        t4 = setTimeout(() => scrollToProduct(false), 600);
       }
+
+      const handleCustomProductSelect = (e: Event) => {
+        const customEvent = e as CustomEvent<{ index: number }>;
+        if (customEvent.detail && typeof customEvent.detail.index === "number") {
+          setSelectedProductIndex(customEvent.detail.index);
+          setTimeout(() => scrollToProduct(true), 50);
+        }
+      };
+
+      const handlePopState = () => {
+        const params = new URLSearchParams(window.location.search);
+        const p = params.get("product");
+        if (p !== null && !isNaN(Number(p))) {
+          setSelectedProductIndex(Number(p));
+          scrollToProduct(true);
+        }
+      };
+
+      window.addEventListener("pvr_select_product", handleCustomProductSelect);
+      window.addEventListener("popstate", handlePopState);
 
       return () => {
         if (t1) clearTimeout(t1);
         if (t2) clearTimeout(t2);
         if (t3) clearTimeout(t3);
         if (t4) clearTimeout(t4);
+        window.removeEventListener("pvr_select_product", handleCustomProductSelect);
+        window.removeEventListener("popstate", handlePopState);
       };
     }
     return undefined;
@@ -480,6 +502,10 @@ export function Services({ isStandalonePage = false }: ServicesProps) {
     }
 
     setSelectedProductIndex(index);
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("pvr_selected_product", String(index));
+      window.history.replaceState({}, "", `/services?product=${index}#product-detail-section`);
+    }
     const el = document.getElementById("product-detail-section");
     if (el) {
       const navHeight = 84;
@@ -533,6 +559,7 @@ export function Services({ isStandalonePage = false }: ServicesProps) {
 
             return (
               <article
+                id={`product-card-${i}`}
                 className={`service-card group cursor-pointer transition-all ${isSelected ? "ring-2 ring-sky-500 shadow-xl border-sky-400" : ""
                   }`}
                 key={item.title}
@@ -607,7 +634,7 @@ export function Services({ isStandalonePage = false }: ServicesProps) {
           <div className="scroll-mt-24">
             <ProductDetailSection
               selectedIndex={selectedProductIndex}
-              onSelectProduct={setSelectedProductIndex}
+              onSelectProduct={handleSelectProduct}
             />
           </div>
         )}

@@ -150,6 +150,27 @@ export function Navbar() {
 }
 
 export function Footer() {
+  const handleProductNav = (index: number, e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof window === "undefined") return;
+    sessionStorage.setItem("pvr_selected_product", String(index));
+
+    if (window.location.pathname === "/services") {
+      e.preventDefault();
+      window.history.pushState({}, "", `/services?product=${index}#product-detail-section`);
+      window.dispatchEvent(new CustomEvent("pvr_select_product", { detail: { index } }));
+      const el = document.getElementById("product-detail-section");
+      if (el) {
+        const navHeight = 84;
+        const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = Math.max(0, elementPosition - navHeight);
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    }
+  };
+
   return (
     <footer className="site-footer">
       <div className="container-width">
@@ -273,14 +294,14 @@ export function Footer() {
           <div className="footer-column">
             <h3>Our Products</h3>
             <ul>
-              {materials.map((item) => (
+              {materials.map((item, index) => (
                 <li key={item.short}>
-                  <Link
-                    to="/services"
-                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                  <a
+                    href={`/services?product=${index}#product-detail-section`}
+                    onClick={(e) => handleProductNav(index, e)}
                   >
                     {item.short}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
