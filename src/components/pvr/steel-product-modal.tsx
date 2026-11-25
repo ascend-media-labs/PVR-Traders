@@ -201,7 +201,6 @@ export function SteelProductModal({ isOpen, onClose, steelImage = "/images/iron-
                     >
                       <div className="cement-type-top">
                         <span className="cement-type-name">{s.size}</span>
-                        <span className="cement-type-tag">Size {s.id}</span>
                       </div>
                       <span className="cement-type-fullname">{s.tag}</span>
                       <p className="cement-type-desc">{s.description}</p>

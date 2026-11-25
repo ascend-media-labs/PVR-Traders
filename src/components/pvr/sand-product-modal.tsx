@@ -248,7 +248,6 @@ export function SandProductModal({ isOpen, onClose, sandImage = "/images/sand-su
                     >
                       <div className="cement-type-top">
                         <span className="cement-type-name">{t.name}</span>
-                        <span className="cement-type-tag">{t.tag}</span>
                       </div>
                       <p className="cement-type-desc">{t.description}</p>
                       {isSelected && (
@@ -287,7 +286,6 @@ export function SandProductModal({ isOpen, onClose, sandImage = "/images/sand-su
                       >
                         <div className="cement-type-top">
                           <span className="cement-type-name">{v.name}</span>
-                          <span className="cement-type-tag">{v.tag}</span>
                         </div>
                         <p className="cement-type-desc">{v.description}</p>
                         {isSelected && (
@@ -329,7 +327,6 @@ export function SandProductModal({ isOpen, onClose, sandImage = "/images/sand-su
                       >
                         <div className="cement-type-top">
                           <span className="cement-type-name">{c.name}</span>
-                          <span className="cement-type-tag">{c.tag}</span>
                         </div>
                         <p className="cement-type-desc">{c.description}</p>
                         {isSelected && (
