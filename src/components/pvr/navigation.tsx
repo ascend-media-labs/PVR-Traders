@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Menu, X, ShoppingCart } from "lucide-react";
+import { ArrowUpRight, Menu, X, ShoppingCart, MapPin } from "lucide-react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { images, navigation, materials } from "@/lib/pvr-content";
+import { images, navigation, materials, contact } from "@/lib/pvr-content";
 import { useCart } from "@/lib/cart-context";
 import { CartDrawer } from "@/components/pvr/cart-drawer";
 
@@ -295,18 +295,30 @@ export function Footer() {
             <h3>Contact Desk</h3>
             <ul>
               <li>
-                <a href="tel:+918121277575" className="hover:text-sky-400 transition-colors">
-                  +91 81212 77575
+                <a href={`tel:${contact.primaryPhoneRaw}`} className="hover:text-sky-400 transition-colors">
+                  {contact.primaryPhone}
                 </a>
               </li>
               <li>
-                <a href="tel:+919866723820" className="hover:text-sky-400 transition-colors">
-                  +91 98667 23820
+                <a href={`tel:${contact.secondaryPhoneRaw}`} className="hover:text-sky-400 transition-colors">
+                  {contact.secondaryPhone}
                 </a>
               </li>
               <li>
-                <a href="mailto:pvrtraders@gmail.com" className="hover:text-sky-400 transition-colors">
-                  pvrtraders@gmail.com
+                <a href={`mailto:${contact.email}`} className="hover:text-sky-400 transition-colors">
+                  {contact.email}
+                </a>
+              </li>
+              <li className="footer-address-item">
+                <a
+                  href={contact.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-sky-400 transition-colors inline-flex items-center gap-1.5"
+                  title="View Depot Location on Google Maps"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-sky-400 flex-shrink-0" />
+                  <span>{contact.address}</span>
                 </a>
               </li>
             </ul>

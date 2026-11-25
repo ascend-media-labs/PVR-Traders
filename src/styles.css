@@ -88,6 +88,7 @@
 }
 
 @layer base {
+
   *,
   *::before,
   *::after {
@@ -3201,7 +3202,7 @@
 .site-footer {
   background: var(--primary);
   color: var(--primary-foreground);
-  padding-top: 55px;
+  padding-top: 36px;
   border-top: 1px solid rgba(56, 189, 248, 0.28);
   box-shadow: inset 0 1px 30px rgba(56, 189, 248, 0.08);
   position: relative;
@@ -3210,37 +3211,37 @@
 .footer-grid {
   display: grid;
   grid-template-columns: 1.5fr 0.8fr 0.8fr 1fr;
-  gap: 50px;
-  padding-bottom: 45px;
+  gap: 36px;
+  padding-bottom: 28px;
 }
 
 .footer-logo {
-  width: 130px;
-  height: 75px;
+  width: 110px;
+  height: 60px;
   object-fit: contain;
   background: var(--background);
   border-radius: 6px;
-  padding: 4px 6px;
+  padding: 3px 6px;
   display: block;
 }
 
 .footer-brand p {
   max-width: 265px;
-  font-size: 12px;
-  line-height: 1.85;
+  font-size: 11.5px;
+  line-height: 1.55;
   color: var(--light-muted);
-  margin-top: 19px;
+  margin-top: 10px;
 }
 
 .footer-social-wrap {
-  margin-top: 22px;
+  margin-top: 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .footer-social-heading {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -3358,9 +3359,9 @@
 }
 
 .footer-column h3 {
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 650;
-  margin-block: 8px 24px;
+  margin-block: 4px 14px;
 }
 
 .footer-column ul {
@@ -3368,7 +3369,7 @@
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 14px;
+  gap: 10px;
   font-size: 11px;
   color: var(--light-muted);
 }
@@ -4079,8 +4080,8 @@
   }
 
   .footer-logo {
-    width: 120px;
-    height: 70px;
+    width: 105px;
+    height: 58px;
   }
 
   .footer-brand p {
@@ -4088,7 +4089,7 @@
   }
 
   .site-footer {
-    padding-top: 40px;
+    padding-top: 28px;
   }
 }
 
@@ -5570,9 +5571,11 @@
     align-items: stretch;
     gap: 8px;
   }
+
   .in-page-bottom-bar .in-page-action-container {
     width: 100%;
   }
+
   .in-page-bottom-bar .in-page-add-btn {
     width: 100%;
     justify-content: center;
