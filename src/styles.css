@@ -2236,7 +2236,7 @@
     margin-bottom: 12px;
   }
 
-  .clients-section .section-header > div:first-child {
+  .clients-section .section-header>div:first-child {
     width: 100%;
   }
 
@@ -2251,7 +2251,7 @@
     color: #475569 !important;
   }
 
-  .clients-section .section-header > div:last-child {
+  .clients-section .section-header>div:last-child {
     width: 100%;
     display: flex;
     align-items: center;
@@ -2523,7 +2523,7 @@
    ========================================================================== */
 .why-section {
   background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(14, 165, 233, 0.08), transparent 70%),
-              linear-gradient(180deg, #f8fafc 0%, #ffffff 50%, #f8fafc 100%);
+    linear-gradient(180deg, #f8fafc 0%, #ffffff 50%, #f8fafc 100%);
   position: relative;
 }
 
@@ -3698,7 +3698,7 @@
     gap: 10px;
   }
 
-  .section-header > div:first-child {
+  .section-header>div:first-child {
     width: 100%;
   }
 
