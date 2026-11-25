@@ -1313,6 +1313,8 @@
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
   width: 100%;
+  padding-top: 14px;
+  margin-top: -10px;
 }
 
 @media (max-width: 1024px) {
@@ -1320,7 +1322,10 @@
     display: flex;
     overflow-x: auto;
     gap: 12px;
-    padding-bottom: 12px;
+    padding-top: 16px;
+    padding-bottom: 14px;
+    padding-inline: 4px;
+    margin-top: -12px;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     width: 100%;
@@ -1999,8 +2004,9 @@
   overflow-x: auto;
   gap: 16px;
   padding-bottom: 14px;
-  padding-top: 4px;
-  padding-inline: 2px;
+  padding-top: 14px;
+  margin-top: -10px;
+  padding-inline: 4px;
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
   width: 100%;
