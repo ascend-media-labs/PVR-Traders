@@ -2196,7 +2196,7 @@
 .project-card {
   position: relative;
   width: 100%;
-  height: clamp(135px, 18.5vh, 160px);
+  height: clamp(210px, 26vh, 250px);
   aspect-ratio: auto;
   border-radius: 16px 5px 16px 5px;
   /* Signature architectural silhouette */
@@ -2257,7 +2257,7 @@
   align-items: center;
   width: 100%;
   box-sizing: border-box;
-  padding: 7px 10px;
+  padding: 12px 14px;
 }
 
 .project-index-badge {
@@ -2335,12 +2335,12 @@
   z-index: 5;
   width: 100%;
   box-sizing: border-box;
-  padding: 8px 14px 12px 14px;
+  padding: 12px 16px 14px 16px;
   display: flex;
   flex-direction: column;
   align-items: flex-start !important;
   text-align: left !important;
-  gap: 3px;
+  gap: 5px;
 }
 
 .project-spec-tag {
@@ -2371,11 +2371,11 @@
 
 .project-title {
   margin: 0;
-  font-size: 15px;
+  font-size: 16.5px;
   font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.015em;
-  line-height: 1.22;
+  line-height: 1.25;
   text-align: left !important;
   width: 100%;
   word-break: break-word;
@@ -3737,8 +3737,8 @@
   .project-card {
     width: 100%;
     aspect-ratio: 16 / 9.5;
-    min-height: 170px;
-    max-height: 230px;
+    min-height: 200px;
+    max-height: 250px;
     height: auto;
   }
 
@@ -3853,7 +3853,7 @@
   }
 
   .project-card {
-    height: 230px;
+    height: 240px;
     aspect-ratio: auto;
   }
 }
