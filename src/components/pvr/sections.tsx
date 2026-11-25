@@ -640,14 +640,71 @@ export function Services({ isStandalonePage = false }: ServicesProps) {
 }
 export function Clients() {
   const clientsContainerRef = useRef<HTMLDivElement>(null);
+  const isInteractingRef = useRef(false);
+
+  // Triple the array to provide an uninterrupted, seamless infinite auto-scroll loop
+  const allClients = [...clientPartners, ...clientPartners, ...clientPartners];
+
+  useEffect(() => {
+    const el = clientsContainerRef.current;
+    if (!el) return;
+
+    let animId: number;
+    let resumeTimeout: NodeJS.Timeout;
+
+    const autoScroll = () => {
+      if (!isInteractingRef.current && el) {
+        const oneSetWidth = el.scrollWidth / 3;
+        // When scrolled past the first set, seamlessly reset offset
+        if (el.scrollLeft >= oneSetWidth * 2) {
+          el.scrollLeft -= oneSetWidth;
+        } else {
+          el.scrollLeft += 0.85; // smooth gliding speed
+        }
+      }
+      animId = requestAnimationFrame(autoScroll);
+    };
+
+    animId = requestAnimationFrame(autoScroll);
+
+    const onPause = () => {
+      isInteractingRef.current = true;
+      if (resumeTimeout) clearTimeout(resumeTimeout);
+    };
+
+    const onResume = () => {
+      if (resumeTimeout) clearTimeout(resumeTimeout);
+      resumeTimeout = setTimeout(() => {
+        isInteractingRef.current = false;
+      }, 1800);
+    };
+
+    el.addEventListener("mouseenter", onPause);
+    el.addEventListener("mouseleave", () => { isInteractingRef.current = false; });
+    el.addEventListener("touchstart", onPause, { passive: true });
+    el.addEventListener("touchend", onResume, { passive: true });
+
+    return () => {
+      cancelAnimationFrame(animId);
+      if (resumeTimeout) clearTimeout(resumeTimeout);
+      el.removeEventListener("mouseenter", onPause);
+      el.removeEventListener("mouseleave", () => { isInteractingRef.current = false; });
+      el.removeEventListener("touchstart", onPause);
+      el.removeEventListener("touchend", onResume);
+    };
+  }, []);
 
   const scrollClients = (direction: "left" | "right") => {
     if (clientsContainerRef.current) {
-      const scrollAmount = 350;
+      isInteractingRef.current = true;
+      const scrollAmount = 360;
       clientsContainerRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
       });
+      setTimeout(() => {
+        isInteractingRef.current = false;
+      }, 2500);
     }
   };
 
@@ -705,10 +762,10 @@ export function Clients() {
           ))}
         </div>
 
-        {/* Client cards single-line horizontal scroll track */}
+        {/* Client cards single-line horizontal auto-scroll track */}
         <div className="clients-grid" ref={clientsContainerRef}>
-          {clientPartners.map((item) => (
-            <article className="client-card group" key={item.name}>
+          {allClients.map((item, idx) => (
+            <article className="client-card group" key={`${item.name}-${idx}`}>
               <div className="client-card-image-wrap">
                 <img
                   src={item.image}
