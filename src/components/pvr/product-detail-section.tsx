@@ -430,15 +430,6 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
         </div>
       </div>
 
-      {/* Main Detail Header */}
-      <div className="product-detail-hero-header">
-        <h2 className="product-detail-main-title">{currentProduct.title}</h2>
-        <div className="product-detail-badge">
-          <span className="badge-glow-dot" />
-          <span>Product Specifications & Direct Procurement</span>
-        </div>
-      </div>
-
       {/* 2-Column Responsive Body */}
       <div className="in-page-columns">
         {/* Left Column: Product Showcase Photo */}
@@ -456,8 +447,16 @@ export function ProductDetailSection({ selectedIndex = 2, onSelectProduct }: Pro
           </div>
         </div>
 
-        {/* Right Column: Interactive Order Configurator */}
+        {/* Right Column: Interactive Order Configurator & Content */}
         <div className="in-page-options-col">
+          {/* Main Detail Header inside Right Column */}
+          <div className="product-detail-hero-header">
+            <h2 className="product-detail-main-title">{currentProduct.title}</h2>
+            <div className="product-detail-badge">
+              <span className="badge-glow-dot" />
+              <span>Product Specifications & Direct Procurement</span>
+            </div>
+          </div>
           {/* Case 1: Sand Supply (Cascading: Type -> Vehicle & Capacity Side-by-Side -> Loads) */}
           {currentProduct.hasSandTypes && currentProduct.sandTypes && (
             <>
