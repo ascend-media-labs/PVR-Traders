@@ -615,16 +615,6 @@ export function Clients() {
           </div>
         </div>
 
-        {/* Client stats strip */}
-        <div className="clients-stats-strip">
-          {clientStats.map((st) => (
-            <div className="client-stat-item" key={st.label}>
-              <span className="client-stat-val">{st.value}</span>
-              <span className="client-stat-lbl">{st.label}</span>
-            </div>
-          ))}
-        </div>
-
         {/* Client cards single-line horizontal auto-scroll track */}
         <div className="clients-grid" ref={clientsContainerRef}>
           {allClients.map((item, idx) => (
@@ -655,6 +645,16 @@ export function Clients() {
                 </div>
               </div>
             </article>
+          ))}
+        </div>
+
+        {/* Client stats strip */}
+        <div className="clients-stats-strip">
+          {clientStats.map((st) => (
+            <div className="client-stat-item" key={st.label}>
+              <span className="client-stat-val">{st.value}</span>
+              <span className="client-stat-lbl">{st.label}</span>
+            </div>
           ))}
         </div>
 
