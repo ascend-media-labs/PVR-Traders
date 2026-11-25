@@ -2267,8 +2267,9 @@
   .clients-section .section-description {
     font-size: 11px !important;
     line-height: 1.45 !important;
-    text-align: left !important;
-    text-justify: auto !important;
+    text-align: justify !important;
+    text-justify: inter-word !important;
+    text-align-last: left !important;
     width: 100% !important;
     max-width: 100% !important;
     margin-top: 3px !important;
@@ -3710,9 +3711,12 @@
   .hero p,
   .why-card-desc,
   .service-card p,
-  .material-card-description {
-    text-align: left !important;
-    text-justify: auto !important;
+  .material-card-description,
+  .product-detail-main-desc,
+  .footer-brand p {
+    text-align: justify !important;
+    text-justify: inter-word !important;
+    text-align-last: left !important;
   }
 
   .section-header {
@@ -3729,7 +3733,9 @@
   .section-header .section-description {
     width: 100%;
     max-width: 100%;
-    text-align: left !important;
+    text-align: justify !important;
+    text-justify: inter-word !important;
+    text-align-last: left !important;
   }
 }
 
