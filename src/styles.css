@@ -2225,6 +2225,39 @@
   }
 }
 
+@media (max-width: 768px) {
+  .clients-section .section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .clients-section .section-header > div:first-child {
+    width: 100%;
+  }
+
+  .clients-section .section-description {
+    font-size: 11px !important;
+    line-height: 1.45 !important;
+    text-align: left !important;
+    text-justify: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 3px !important;
+    color: #475569 !important;
+  }
+
+  .clients-section .section-header > div:last-child {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4px;
+  }
+}
+
 @media (max-width: 600px) {
   .client-card {
     flex: 0 0 clamp(270px, 82vw, 320px);
@@ -3643,6 +3676,35 @@
   .hero-index-capsule {
     display: none;
   }
+
+  p,
+  .section-description,
+  .about-lead,
+  .about-copy p,
+  .hero p,
+  .why-card-desc,
+  .service-card p,
+  .material-card-description {
+    text-align: left !important;
+    text-justify: auto !important;
+  }
+
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .section-header > div:first-child {
+    width: 100%;
+  }
+
+  .section-header .section-description {
+    width: 100%;
+    max-width: 100%;
+    text-align: left !important;
+  }
 }
 
 @media (max-width: 600px) {
@@ -3803,8 +3865,8 @@
   }
 
   .section-header {
-    gap: 15px;
-    margin-bottom: 25px;
+    gap: 10px;
+    margin-bottom: 16px;
   }
 
   .carousel-counter-badge {
