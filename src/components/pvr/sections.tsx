@@ -30,7 +30,6 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ProductDetailSection } from "@/components/pvr/product-detail-section";
 import {
   images,
   heroSlides,
@@ -237,7 +236,7 @@ export function MaterialsCarousel() {
                 onClick={() => {
                   if (typeof window !== "undefined") {
                     sessionStorage.setItem("pvr_selected_product", String(index));
-                    window.location.href = `/services?product=${index}#product-detail-section`;
+                    window.location.href = `/product-detail?product=${index}`;
                   }
                 }}
                 role="button"
@@ -247,7 +246,7 @@ export function MaterialsCarousel() {
                     e.preventDefault();
                     if (typeof window !== "undefined") {
                       sessionStorage.setItem("pvr_selected_product", String(index));
-                      window.location.href = `/services?product=${index}#product-detail-section`;
+                      window.location.href = `/product-detail?product=${index}`;
                     }
                   }
                 }}
@@ -286,7 +285,7 @@ export function MaterialsCarousel() {
                         e.stopPropagation();
                         if (typeof window !== "undefined") {
                           sessionStorage.setItem("pvr_selected_product", String(index));
-                          window.location.href = `/services?product=${index}#product-detail-section`;
+                          window.location.href = `/product-detail?product=${index}`;
                         }
                       }}
                     >
@@ -396,112 +395,20 @@ interface ServicesProps {
 export function Services({ isStandalonePage = false }: ServicesProps) {
   const isServicesRoute = isStandalonePage;
 
-  const [selectedProductIndex, setSelectedProductIndex] = useState(0);
-
   useEffect(() => {
     if (typeof window !== "undefined" && isServicesRoute) {
       const urlParams = new URLSearchParams(window.location.search);
       const urlProd = urlParams.get("product");
-      const saved = sessionStorage.getItem("pvr_selected_product");
-      const targetProd =
-        urlProd !== null && !isNaN(Number(urlProd))
-          ? Number(urlProd)
-          : saved !== null && !isNaN(Number(saved))
-            ? Number(saved)
-            : null;
-
-      if (targetProd !== null) {
-        setSelectedProductIndex(targetProd);
+      if (urlProd !== null && !isNaN(Number(urlProd))) {
+        window.location.replace(`/product-detail?product=${urlProd}`);
       }
-
-      const isFromBookNow =
-        targetProd !== null ||
-        window.location.hash === "#product-detail-section" ||
-        urlParams.has("product");
-
-      let t1: NodeJS.Timeout | undefined;
-      let t2: NodeJS.Timeout | undefined;
-      let t3: NodeJS.Timeout | undefined;
-      let t4: NodeJS.Timeout | undefined;
-
-      const scrollToProduct = (smooth = false) => {
-        const el = document.getElementById("product-detail-section");
-        if (el) {
-          const navHeight = 84;
-          const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
-          const offsetPosition = Math.max(0, elementPosition - navHeight);
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: smooth ? "smooth" : "instant",
-          });
-        }
-      };
-
-      if (isFromBookNow) {
-        // Run immediately and across initial frame intervals to guarantee exact position
-        scrollToProduct(false);
-        requestAnimationFrame(() => scrollToProduct(false));
-        t1 = setTimeout(() => scrollToProduct(false), 60);
-        t2 = setTimeout(() => scrollToProduct(false), 160);
-        t3 = setTimeout(() => scrollToProduct(false), 350);
-        t4 = setTimeout(() => scrollToProduct(false), 600);
-      }
-
-      const handleCustomProductSelect = (e: Event) => {
-        const customEvent = e as CustomEvent<{ index: number }>;
-        if (customEvent.detail && typeof customEvent.detail.index === "number") {
-          setSelectedProductIndex(customEvent.detail.index);
-          setTimeout(() => scrollToProduct(true), 50);
-        }
-      };
-
-      const handlePopState = () => {
-        const params = new URLSearchParams(window.location.search);
-        const p = params.get("product");
-        if (p !== null && !isNaN(Number(p))) {
-          setSelectedProductIndex(Number(p));
-          scrollToProduct(true);
-        }
-      };
-
-      window.addEventListener("pvr_select_product", handleCustomProductSelect);
-      window.addEventListener("popstate", handlePopState);
-
-      return () => {
-        if (t1) clearTimeout(t1);
-        if (t2) clearTimeout(t2);
-        if (t3) clearTimeout(t3);
-        if (t4) clearTimeout(t4);
-        window.removeEventListener("pvr_select_product", handleCustomProductSelect);
-        window.removeEventListener("popstate", handlePopState);
-      };
     }
-    return undefined;
   }, [isServicesRoute]);
 
   const handleSelectProduct = (index: number) => {
-    if (!isServicesRoute) {
-      if (typeof window !== "undefined") {
-        sessionStorage.setItem("pvr_selected_product", String(index));
-        window.location.href = `/services?product=${index}#product-detail-section`;
-      }
-      return;
-    }
-
-    setSelectedProductIndex(index);
     if (typeof window !== "undefined") {
       sessionStorage.setItem("pvr_selected_product", String(index));
-      window.history.replaceState({}, "", `/services?product=${index}#product-detail-section`);
-    }
-    const el = document.getElementById("product-detail-section");
-    if (el) {
-      const navHeight = 84;
-      const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = Math.max(0, elementPosition - navHeight);
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
+      window.location.href = `/product-detail?product=${index}`;
     }
   };
 
@@ -542,13 +449,11 @@ export function Services({ isStandalonePage = false }: ServicesProps) {
         <div className="service-grid">
           {materials.map((item, i) => {
             const Icon = serviceIcons[i] ?? Package;
-            const isSelected = isServicesRoute && selectedProductIndex === i;
 
             return (
               <article
                 id={`product-card-${i}`}
-                className={`service-card group cursor-pointer transition-all ${isSelected ? "ring-2 ring-sky-500 shadow-xl border-sky-400" : ""
-                  }`}
+                className="service-card group cursor-pointer transition-all"
                 key={item.title}
                 onClick={() => handleSelectProduct(i)}
                 role="button"
@@ -579,48 +484,20 @@ export function Services({ isStandalonePage = false }: ServicesProps) {
                   <h3 className="service-card-title">{item.title}</h3>
                   <button
                     type="button"
-                    className={`service-enquire-btn transition-all ${isSelected
-                      ? "service-active-gradient-btn text-white shadow-md"
-                      : "hover:service-active-gradient-btn"
-                      }`}
+                    className="service-enquire-btn transition-all hover:service-active-gradient-btn"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleSelectProduct(i);
                     }}
                   >
-                    <span>
-                      {isServicesRoute
-                        ? isSelected
-                          ? "Active Specification 👇"
-                          : "Configure & Order"
-                        : "Configure & Order"}
-                    </span>
-                    {isServicesRoute ? (
-                      <ShoppingCart
-                        className={`w-3.5 h-3.5 ${isSelected
-                          ? "text-white"
-                          : "text-sky-600 group-hover:text-white transition-colors"
-                          }`}
-                      />
-                    ) : (
-                      <ArrowUpRight className="w-3.5 h-3.5 text-sky-600 group-hover:text-white transition-colors" />
-                    )}
+                    <span>Active Specification</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 text-sky-600 group-hover:text-white transition-colors" />
                   </button>
                 </div>
               </article>
             );
           })}
         </div>
-
-        {/* In-Page In-Detail Product Specification & Configurator - ONLY on Services Page */}
-        {isServicesRoute && (
-          <div className="scroll-mt-24">
-            <ProductDetailSection
-              selectedIndex={selectedProductIndex}
-              onSelectProduct={handleSelectProduct}
-            />
-          </div>
-        )}
       </Reveal>
     </section>
   );
