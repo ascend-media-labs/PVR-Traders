@@ -2421,7 +2421,7 @@
 .why-card-premium {
   background: linear-gradient(180deg, #ffffff 0%, #fafcfd 100%);
   border: 1px solid rgba(226, 232, 240, 0.95);
-  border-radius: 20px;
+  border-radius: 12px;
   padding: 28px 22px 22px;
   display: flex;
   flex-direction: column;
@@ -2468,7 +2468,7 @@
 .why-icon-box {
   width: 52px;
   height: 52px;
-  border-radius: 15px;
+  border-radius: 11px;
   background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
   color: #0284c7;
   display: flex;
