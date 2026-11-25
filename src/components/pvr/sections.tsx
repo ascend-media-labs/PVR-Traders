@@ -144,19 +144,6 @@ export function Hero() {
               </Link>
             </Button>
           </div>
-          <div className="hero-trust-pills">
-            <div className="hero-trust-item">
-              <BadgeCheck /> <span>100% Quality Tested</span>
-            </div>
-            <div className="hero-trust-divider" />
-            <div className="hero-trust-item">
-              <Truck /> <span>Direct Site Delivery</span>
-            </div>
-            <div className="hero-trust-divider" />
-            <div className="hero-trust-item">
-              <ShieldCheck /> <span>Certified High Strength</span>
-            </div>
-          </div>
         </div>
 
         <div className="container-width hero-caption">
