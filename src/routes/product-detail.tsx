@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Navbar, Footer, FloatingContactActions } from "@/components/pvr/navigation";
 import { ProductDetailSection } from "@/components/pvr/product-detail-section";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, ShoppingCart } from "lucide-react";
 import { materials } from "@/lib/pvr-content";
+import { useCart } from "@/lib/cart-context";
+import { CartDrawer } from "@/components/pvr/cart-drawer";
+import { FloatingContactActions } from "@/components/pvr/navigation";
 
 export const Route = createFileRoute("/product-detail")({
   head: () => ({
@@ -21,6 +23,7 @@ export const Route = createFileRoute("/product-detail")({
 
 function ProductDetailPage() {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const { totalItems, setIsCartOpen } = useCart();
 
   useEffect(() => {
     // Read from search query (?product=X) or sessionStorage
@@ -43,44 +46,54 @@ function ProductDetailPage() {
     setSelectedIndex(index);
     sessionStorage.setItem("pvr_selected_product", String(index));
     window.history.replaceState({}, "", `/product-detail?product=${index}`);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <>
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-background focus:p-4"
-      >
-        Skip to content
-      </a>
-      <Navbar />
-      <main id="main-content" className="product-detail-page-main">
-        <div className="container-width" style={{ paddingTop: "20px", paddingBottom: "24px" }}>
-          <div className="flex items-center justify-between mb-3">
-            <Link
-              to="/services"
-              className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-sky-700 hover:text-sky-900 transition-colors py-1.5 px-3.5 rounded-full bg-sky-50 border border-sky-200 shadow-xs"
+    <div className="product-detail-fullscreen-shell">
+      {/* Sleek Top Navigation Bar */}
+      <header className="product-detail-top-bar">
+        <div className="container-width product-detail-top-inner">
+          <Link
+            to="/services"
+            className="product-detail-back-pill"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Back to All Products</span>
+          </Link>
+          <div className="flex items-center gap-2.5 sm:gap-4">
+            <button
+              type="button"
+              className="product-detail-cart-pill"
+              onClick={() => setIsCartOpen(true)}
+              aria-label="View Material Cart"
             >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Back to All Products</span>
-            </Link>
+              <ShoppingCart className="w-3.5 h-3.5 text-sky-600" />
+              <span className="hidden sm:inline">Material Cart</span>
+              {totalItems > 0 && <span className="cart-pill-count">{totalItems}</span>}
+            </button>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-sky-700 transition-colors"
+              className="product-detail-support-link"
             >
               <span>Need Custom Supply Support?</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </div>
+        </div>
+      </header>
+
+      {/* Main Full-Viewport Configurator Workspace */}
+      <main id="main-content" className="product-detail-workspace">
+        <div className="container-width product-detail-workspace-inner">
           <ProductDetailSection
             selectedIndex={selectedIndex}
             onSelectProduct={handleSelectProduct}
           />
         </div>
       </main>
-      <Footer />
+
+      <CartDrawer />
       <FloatingContactActions />
-    </>
+    </div>
   );
 }
