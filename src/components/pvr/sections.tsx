@@ -112,35 +112,99 @@ export function Hero() {
           <ChevronRight />
         </button>
 
-        <div className="container-width hero-copy">
-          <div className="hero-slide-badge">
-            <span className="hero-badge-pulse" />
-            <span className="hero-badge-company">PVR TRADERS</span>
-            <span className="hero-badge-sep" />
-            <HardHat />
-            <span>{slide.badge}</span>
+        <div className="container-width hero-body-grid">
+          <div className="hero-copy">
+            <div className="hero-slide-badge">
+              <span className="hero-badge-pulse" />
+              <span className="hero-badge-company">PVR TRADERS</span>
+              <span className="hero-badge-sep" />
+              <HardHat />
+              <span>{slide.badge}</span>
+            </div>
+            <h1 key={`title-${current}`}>
+              {slide.title.map((line, i) => (
+                <span key={i} className={i === slide.title.length - 1 ? "hero-highlight" : ""}>
+                  {line}
+                </span>
+              ))}
+            </h1>
+            <p key={`desc-${current}`}>
+              {slide.description}
+            </p>
+            <div className="hero-buttons">
+              <Button variant="hero" size="lg" className="hero-btn-primary" asChild>
+                <Link to="/services" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+                  Explore Our Products <ArrowUpRight />
+                </Link>
+              </Button>
+              <Button variant="heroOutline" size="lg" className="hero-btn-secondary" asChild>
+                <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+                  Contact Us <ArrowRight />
+                </Link>
+              </Button>
+            </div>
           </div>
-          <h1 key={`title-${current}`}>
-            {slide.title.map((line, i) => (
-              <span key={i} className={i === slide.title.length - 1 ? "hero-highlight" : ""}>
-                {line}
-              </span>
-            ))}
-          </h1>
-          <p key={`desc-${current}`}>
-            {slide.description}
-          </p>
-          <div className="hero-buttons">
-            <Button variant="hero" size="lg" className="hero-btn-primary" asChild>
-              <Link to="/services" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-                Explore Our Products <ArrowUpRight />
-              </Link>
-            </Button>
-            <Button variant="heroOutline" size="lg" className="hero-btn-secondary" asChild>
-              <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-                Contact Us <ArrowRight />
-              </Link>
-            </Button>
+
+          {/* Premium 5-Products Circular Rotating Orbit */}
+          <div className="hero-orbit-wrapper" aria-label="Core Construction Products Rotating Showcase">
+            <div className="hero-orbit-stage">
+              {/* Ambient Glow */}
+              <div className="hero-orbit-ambient-glow" />
+
+              {/* Circular Orbit Ring */}
+              <div className="hero-orbit-ring" />
+
+              {/* Center Core Hub */}
+              <div className="hero-orbit-center-hub">
+                <div className="hero-hub-inner-dot" />
+                <span className="hero-hub-tag">PVR</span>
+                <span className="hero-hub-sub">PRODUCTS</span>
+              </div>
+
+              {/* Rotating Track with 5 Circular Orbit Cards */}
+              <div className="hero-orbit-track">
+                {materials.slice(0, 5).map((mat, idx) => {
+                  const radius = 120; // radius in px
+                  const angle = (idx * (360 / 5) - 90) * (Math.PI / 180);
+                  const x = Math.round(radius * Math.cos(angle));
+                  const y = Math.round(radius * Math.sin(angle));
+
+                  return (
+                    <div
+                      key={mat.title}
+                      className="hero-orbit-item-slot"
+                      style={{
+                        left: `calc(50% + ${x}px)`,
+                        top: `calc(50% + ${y}px)`,
+                      }}
+                    >
+                      <button
+                        type="button"
+                        className="hero-orbit-card"
+                        onClick={() => {
+                          if (typeof window !== "undefined") {
+                            sessionStorage.setItem("pvr_selected_product", String(idx));
+                            window.location.href = `/product-detail?product=${idx}`;
+                          }
+                        }}
+                        title={`View ${mat.title}`}
+                      >
+                        <div className="hero-orbit-card-img-wrap">
+                          <img
+                            src={mat.image}
+                            alt={mat.title}
+                            className="hero-orbit-card-img"
+                            loading="lazy"
+                          />
+                          <span className="hero-orbit-card-badge">0{idx + 1}</span>
+                        </div>
+                        <span className="hero-orbit-card-name">{mat.short}</span>
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
 
