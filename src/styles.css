@@ -3343,8 +3343,28 @@
   }
 
   .mobile-menu .nav-link {
-    padding: 13px 0;
-    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-self: start;
+    width: fit-content;
+    padding: 8px 16px;
+    font-size: 14.5px;
+    font-weight: 550;
+    border-radius: 9999px;
+    color: #475569;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mobile-menu .nav-link:hover {
+    color: #0f172a;
+    background: rgba(241, 245, 249, 0.95);
+  }
+
+  .mobile-menu .nav-link.active {
+    color: #0284c7;
+    font-weight: 700;
+    background: #ffffff;
+    box-shadow: 0 2px 8px -1px rgba(15, 23, 42, 0.1), 0 0 12px rgba(14, 165, 233, 0.22), 0 0 0 1.5px rgba(14, 165, 233, 0.4);
   }
 
   .mobile-menu .nav-link:after {
